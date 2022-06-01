@@ -1,56 +1,39 @@
-document.getElementById('botonCalcular').addEventListener('click', (e) => {
-    e.preventDefault();
+let app = Vue.createApp({
+    data() {
+        return {
+            numeroA: 0,
+            numeroB: 0,
+            operacion: 'suma',
+        }
+    },
+    methods: {
+    },
+    computed: {
+        resultado() {
+            switch (this.operacion) {
+                case 'suma':
+                    return this.numeroA + this.numeroB;
 
-    let numeroA = parseFloat(document.getElementById('numeroA').value);
-    let numeroB = parseFloat(document.getElementById('numeroB').value);
-    let operacion = document.getElementById('selectorOperacion').value;
-    let resultado;
-    let textoOperacion;
+                case 'resta':
+                    return this.numeroA - this.numeroB;
 
-    switch (operacion) {
-        case 'suma':
-            resultado = numeroA + numeroB;
-            textoOperacion = numeroA + ' + ' + numeroB;
-            break;
+                case 'multiplicacion':
+                    return this.numeroA * this.numeroB;
 
-        case 'resta':
-            resultado = numeroA - numeroB;
-            textoOperacion = numeroA + ' - ' + numeroB;
-            break;
+                case 'division':
+                    return this.numeroA / this.numeroB;
 
-        case 'multiplicacion':
-            resultado = numeroA * numeroB;
-            textoOperacion = numeroA + ' * ' + numeroB;
-            break;
+                case 'potencia':
+                    return Math.pow(this.numeroA, this.numeroB);
 
-        case 'division':
-            resultado = numeroA / numeroB;
-            textoOperacion = numeroA + ' division ' + numeroB;
-            break;
+                case 'raiz':
+                    return Math.pow(this.numeroA, 1 / this.numeroB);
 
-        case 'potencia':
-            resultado = Math.pow(numeroA, numeroB);
-            textoOperacion = numeroA + ' ^ ' + numeroB;
-            break;
-
-        case 'raiz':
-            resultado = Math.pow(numeroA, 1 / numeroB);
-            textoOperacion = numeroA + ' // ' + numeroB;
-            break;
-
-        case 'modulo':
-            resultado = numeroA % numeroB;
-            textoOperacion = numeroA + ' % ' + numeroB;
-            break;
+                case 'modulo':
+                    return this.numeroA % this.numeroB;
+            }
+        }
     }
+});
 
-    let etiquetaP = document.createElement('p');
-    etiquetaP.appendChild(document.createTextNode('El resultado es ' + resultado));
-
-    document.getElementById('resultado').innerHTML = '';
-    document.getElementById('resultado').appendChild(etiquetaP);
-
-    let operacionHistorial = document.createElement('p');
-    operacionHistorial.appendChild(document.createTextNode(textoOperacion));
-    document.getElementById('historial').appendChild(operacionHistorial);
-})
+app.mount('#app');
